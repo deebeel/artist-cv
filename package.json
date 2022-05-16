@@ -20,15 +20,10 @@
     "@vanilla-extract/css": "^1.7.0",
     "@vanilla-extract/webpack-plugin": "^2.1.10",
     "gatsby": "^4.14.0",
-    "gatsby-plugin-image": "^2.14.1",
-    "gatsby-plugin-manifest": "^4.14.0",
-    "gatsby-plugin-sharp": "^4.14.1",
+    "gatsby-plugin-gatsby-cloud": "^4.14.0",
     "gatsby-plugin-sitemap": "^5.14.0",
     "gatsby-plugin-vanilla-extract": "^2.0.1",
-    "gatsby-plugin-gatsby-cloud": "^4.14.0",
     "gatsby-source-contentful": "^7.12.0",
-    "gatsby-source-filesystem": "^4.14.0",
-    "gatsby-transformer-sharp": "^4.14.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0"
   },
@@ -37,6 +32,11 @@
     "@types/react": "^18.0.9",
     "@types/react-dom": "^18.0.4",
     "babel-preset-gatsby": "^2.14.0",
+    "gatsby-plugin-image": "^2.14.1",
+    "gatsby-plugin-manifest": "^4.14.0",
+    "gatsby-plugin-root-import": "^2.0.8",
+    "gatsby-plugin-sharp": "^4.14.1",
+    "gatsby-transformer-sharp": "^4.14.0",
     "typescript": "^4.6.4"
   }
 }

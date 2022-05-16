@@ -7,6 +7,7 @@ const config: GatsbyConfig = {
     siteUrl: `https://www.yourdomain.tld`
   },
   plugins: [
+    'gatsby-plugin-root-import',
     {
       resolve: 'gatsby-source-contentful',
       options: {
@@ -16,7 +17,6 @@ const config: GatsbyConfig = {
     },
     'gatsby-plugin-vanilla-extract',
     'gatsby-plugin-image',
-    'gatsby-plugin-sitemap',
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
