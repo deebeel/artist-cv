@@ -4,10 +4,12 @@ import {Event} from 'components/event';
 
 export default function Home() {
     const allEvents = useAllEvents();
-    return <Layout pageTitle="events">
-        {allEvents.map(e => <Event
-            key={e.id} place={e.place} title={e.title}
-            from={e.from} to={e.to} description={e.description}/>)}
+    return <Layout pageTitle="Events">
+        <div className="flex flex-col gap-4">
+            {allEvents.map(e => <Event
+                key={e.id} place={e.place} title={e.title}
+                from={e.from} to={e.to} description={e.description}/>)}
+        </div>
     </Layout>
 }
 
@@ -29,11 +31,9 @@ function useAllEvents() {
                 id,
                 title,
                 place,
-                from(formatString: "MMMM D, YYYY"),
-                to(formatString: "MMMM D, YYYY"),
-                description {
-                    description
-                }
+                from,
+                to,
+                description { description }
             }
         }
     }`)

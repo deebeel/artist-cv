@@ -9,11 +9,16 @@ declare global {
             mimeType: string;
         }
         export type Image = File & {
-            gatsbyImage: IGatsbyImageData
+            thumb: IGatsbyImageData
+            description?: string;
+        }
+        export type FullScreenImage = Image & {
+            full: IGatsbyImageData
         }
     }
     type GenericProps<T = unknown> = T & {
         children?: React.ReactNode
+        className?: string;
     }
 }
 export {}

@@ -1,12 +1,11 @@
 import {graphql, Link, useStaticQuery} from 'gatsby';
-import * as styles from './layout.module.css';
 
-export function Header({title}: { title: string }) {
+export function Title({title}: { title: string }) {
     const name = useArtistName();
     return <>
         <title>{title} | {name}</title>
-        <header className={styles.header}>
-            <Link to="/">{name}</Link>
+        <header className="m-1 font-display">
+            <Link to="/" className="uppercase font-bold text-lg">{name}</Link>
         </header>
     </>
 }
