@@ -3,8 +3,10 @@ import {isEmpty} from 'utils/isEmpty';
 import {Description, DescriptionDefinition} from './description';
 import {GatsbyImage} from 'gatsby-plugin-image';
 import {Link} from 'gatsby';
+import slugify from '@sindresorhus/slugify';
 
 export type WorkDefinition = {
+    id: string;
     title: string;
     date: string;
     place?: string;
@@ -55,11 +57,13 @@ function Material({material}: { material?: string[] }) {
     return <div>{material.join(', ')}</div>;
 }
 
-function Media({media}: { media: Demo.FullScreenImage[] }) {
+function Media({media}: { media?: Demo.FullScreenImage[] }) {
+    if (media == null) {
+        return null;
+    }
     return <div className="flex flex-wrap gap-1">
         {media.map(m => <Link
-            to="media"
-            state={{id: m.id}}
+            to={slugify(m.title)}
             className="flex flex-col justify-center"
             key={m.id}><GatsbyImage className="object-contain" alt={m.title} image={m.thumb}/></Link>)}
     </div>

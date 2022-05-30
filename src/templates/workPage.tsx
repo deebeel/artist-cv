@@ -9,8 +9,8 @@ export default function WorkPage({data}: PageProps<{ work: WorkDefinition }>) {
     </Layout>
 }
 export const pageQuery = graphql`
-    query workPageQuery($id:String!) {
-        work:contentfulWork(id: { eq: $id }) {
+    query workPageQuery($id: String!) {
+        work: contentfulWork(id: { eq: $id }) {
             title
             date
             place
