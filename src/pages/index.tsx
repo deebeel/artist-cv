@@ -1,5 +1,5 @@
-import Home from './home';
+import Events from './events';
 
 export default function IndexPage() {
-    return <Home/>;
+    return <Events/>;
 }

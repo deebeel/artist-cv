@@ -64,6 +64,7 @@ function Media({media}: { media?: Demo.FullScreenImage[] }) {
     return <div className="flex flex-wrap gap-1">
         {media.map(m => <Link
             to={slugify(m.title)}
+            state={{modal: true}}
             className="flex flex-col justify-center"
             key={m.id}><GatsbyImage className="object-contain" alt={m.title} image={m.thumb}/></Link>)}
     </div>

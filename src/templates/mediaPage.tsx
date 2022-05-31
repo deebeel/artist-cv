@@ -2,7 +2,6 @@ import {Modal} from 'components/modal';
 import {Carousel} from 'components/carousel';
 import {graphql, navigate, PageProps} from 'gatsby';
 import {Work, WorkDefinition} from 'components/work';
-import {Layout} from 'components/layout';
 import slugify from '@sindresorhus/slugify';
 
 export default function MediaPage({
@@ -11,15 +10,15 @@ export default function MediaPage({
                                   }: PageProps<{ work: WorkDefinition, media: Demo.FullScreenImage }, { nextTitle?: string, prevTitle?: string, isNotOnlyOne: boolean }>) {
     const {work, media} = data;
     const {isNotOnlyOne, prevTitle, nextTitle} = pageContext;
-    return <Layout pageTitle={work.title}>
+    return <>
         <Work work={work}/>
-        <Modal onClose={() => navigate(`/works/${slugify(work.title)}`)}>
+        <Modal onClose={() => navigate(`../`)}>
             <Carousel image={media}
                       isNotOnlyOne={isNotOnlyOne}
-                      onPrev={isNotOnlyOne ? () => navigate(`/works/${slugify(work.title)}/${slugify(prevTitle!)}`) : undefined}
-                      onNext={isNotOnlyOne ? () => navigate(`/works/${slugify(work.title)}/${slugify(nextTitle!)}`) : undefined}/>
+                      onPrev={isNotOnlyOne ? () => navigate(`../${slugify(prevTitle!)}`) : undefined}
+                      onNext={isNotOnlyOne ? () => navigate(`../${slugify(nextTitle!)}`) : undefined}/>
         </Modal>
-    </Layout>
+    </>
 }
 
 export const pageQuery = graphql`
