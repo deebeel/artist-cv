@@ -2,7 +2,7 @@ import {graphql, Link, useStaticQuery} from 'gatsby';
 
 export function ArtistName() {
     const name = useArtistName();
-    return <header className="m-1 font-display">
+    return <header className="font-display">
         <Link to="/" className="uppercase font-bold text-lg">{name}</Link>
     </header>
 }

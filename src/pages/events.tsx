@@ -1,8 +1,9 @@
 import {graphql, useStaticQuery} from 'gatsby';
-import {Event} from 'components/event';
 import {Title} from 'components/title';
+import {DateTimeRange} from 'components/dateTimeRange';
+import {JumpLink} from 'components/jumpLink';
 
-export default function events() {
+export default function Events() {
     const allEvents = useAllEvents();
     return <>
         <Title title="Events"/>
@@ -42,4 +43,24 @@ function useAllEvents() {
         ...rest,
         description: description.description
     })) as EventModel[]
+}
+
+
+type Props = {
+    title: string;
+    place: string;
+    from: string;
+    to: string;
+    description: string;
+};
+
+export function Event({title, place, from, to, description}: Props) {
+    return <section className="flex flex-col gap-1">
+        <JumpLink title={title}>
+            <h2 className="font-semibold mb-2">{title}</h2>
+        </JumpLink>
+        <div className="text-sm">{place}</div>
+        <DateTimeRange className="text-sm" from={from} to={to}/>
+        <div className="mb-2 text-base">{description}</div>
+    </section>
 }

@@ -2,7 +2,7 @@ import {renderRichText} from 'gatsby-source-contentful/rich-text';
 import {GatsbyImage, IGatsbyImageData} from 'gatsby-plugin-image';
 import {Block, BLOCKS, Inline, INLINES, MARKS, Node} from '@contentful/rich-text-types'
 import {Options} from '@contentful/rich-text-react-renderer';
-import {JumpLink} from './jumpLink';
+import {JumpLink} from 'components/jumpLink';
 
 export type ReferenceContent = {
     contentful_id: string;
@@ -101,8 +101,8 @@ const options: Options = {
         [BLOCKS.EMBEDDED_ASSET]: (node: Node) => {
             const {thumb, title} = node.data.target as Demo.Image
             return <div className="flex flex-col justify-center items-center mb-10 gap-1">
-                <div><GatsbyImage image={thumb} alt={title}/></div>
-                <div className="text-sm">{title}</div>
+                <div><GatsbyImage image={thumb} objectFit="contain" alt={title}/></div>
+                <div className="text-xs">{title}</div>
             </div>
         },
     },

@@ -1,6 +1,6 @@
 import {graphql, PageProps} from 'gatsby';
-import {Work, WorkDefinition} from 'components/work';
-import {Title} from '../components/title';
+import {Work, WorkDefinition} from './work';
+import {Title} from 'components/title';
 
 export default function WorkPage({data}: PageProps<{ work: WorkDefinition }>) {
     const work = data.work;
@@ -33,8 +33,7 @@ export const pageQuery = graphql`
                 url
                 id
                 mimeType
-                thumb: gatsbyImage(width: 200)             
-                full: gatsbyImage(width: 1000)             
+                thumb: gatsbyImage(width: 400, fit: CONTAIN)                                        
             } 
         }
     }

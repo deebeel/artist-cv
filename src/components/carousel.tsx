@@ -6,11 +6,13 @@ import mousetrap from 'mousetrap';
 import {useEffect} from 'react';
 
 export function Carousel({
-                             isNotOnlyOne,
                              image,
                              onNext,
                              onPrev
-                         }: { image: Demo.FullScreenImage, isNotOnlyOne: boolean, onNext?: () => void, onPrev?: () => void }) {
+                         }: { image: Demo.FullScreenImage, onNext?: () => void, onPrev?: () => void }) {
+    const hasNext = onNext != null;
+    const hasPrev = onPrev != null;
+    const isNotOnlyOne = hasNext || hasPrev;
     useEffect(() => {
         if (!isNotOnlyOne) {
             return;
@@ -25,14 +27,15 @@ export function Carousel({
         };
     }, [isNotOnlyOne, onNext, onNext]);
     return <div className="relative h-full">
-        <div className="overflow-hidden relative rounded-lg h-full">
+        <div className="overflow-hidden relative h-full">
             <GatsbyImage
                 alt={image.title}
                 image={image.full}
-                className={classNames('duration-700 object-contain ease-in-out block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2')}/>
+                objectFit="contain"
+                className={classNames('duration-700 ease-in-out block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2')}/>
         </div>
-        {isNotOnlyOne && <PrevButton onClick={onNext!}/>}
-        {isNotOnlyOne && <NextButton onClick={onPrev!}/>}
+        {hasPrev && <PrevButton onClick={onNext!}/>}
+        {hasNext && <NextButton onClick={onPrev!}/>}
     </div>
 }
 

@@ -6,12 +6,13 @@ import slugify from '@sindresorhus/slugify';
 export function Nav() {
     const workNav = useWorkNavigationInfo();
     return <nav className="flex flex-col gap-3">
-        <NavGroup title="Works">
+        <NavGroup>
             {workNav.map(n => <NavItem key={n.id} location={`/works/${slugify(n.title)}`}>{n.title}</NavItem>)}
         </NavGroup>
-        <NavGroup title="Info">
-            <NavItem location="/">Home</NavItem>
+        <NavGroup>
             <NavItem location="/about">About</NavItem>
+            <NavItem location="/contacts">Contacts</NavItem>
+            <NavItem location="/">Events</NavItem>
         </NavGroup>
     </nav>;
 }

@@ -45,7 +45,6 @@ module.exports.createPages = async function createPages({actions, graphql, baseP
                     id: currentMedia.id,
                     title: currentMedia.title,
                     workId: work.id,
-                    isNotOnlyOne,
                     nextTitle: isNotOnlyOne ? work.media[newIndex(i + 1, work.media.length)].title: undefined,
                     prevTitle: isNotOnlyOne ? work.media[newIndex(i - 1, work.media.length)].title: undefined
                 }
