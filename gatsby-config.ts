@@ -1,8 +1,7 @@
 import type {GatsbyConfig} from 'gatsby';
 const config: GatsbyConfig = {
     siteMetadata: {
-        title: `Demo`,
-        siteUrl: `https://www.yourdomain.tld`
+        title: `CV: Elisa Mamardashvili`
     },
     plugins: [
         'gatsby-plugin-root-import',
