@@ -1,5 +1,6 @@
 import type {GatsbyConfig} from 'gatsby';
-const config: GatsbyConfig = {
+
+export default {
     siteMetadata: {
         title: `CV: Elisa Mamardashvili`
     },
@@ -31,7 +32,7 @@ const config: GatsbyConfig = {
             }
         },
         {
-            resolve: "gatsby-plugin-svgr-svgo",
+            resolve: 'gatsby-plugin-svgr-svgo',
             options: {
                 inlineSvgOptions: [
                     {
@@ -39,12 +40,12 @@ const config: GatsbyConfig = {
                         svgoConfig: {
                             plugins: [
                                 {
-                                    name: "preset-default",
+                                    name: 'preset-default',
                                     params: {
-                                        overrides: [{ name: "removeViewBox", active: false }],
+                                        overrides: [{name: 'removeViewBox', active: false}],
                                     },
                                 },
-                                "prefixIds",
+                                'prefixIds',
                             ],
                         },
                     },
@@ -53,13 +54,11 @@ const config: GatsbyConfig = {
                     {
                         test: /\.url.svg$/,
                         svgoConfig: {
-                            plugins: [{ name: "removeViewBox", active: false }],
+                            plugins: [{name: 'removeViewBox', active: false}],
                         },
                     },
                 ],
             },
         },
     ]
-};
-
-export default config;
+} as GatsbyConfig;
