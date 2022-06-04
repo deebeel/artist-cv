@@ -1,10 +1,13 @@
 import {graphql, PageProps} from 'gatsby';
 import MailIcon from 'components/icons/mail.svg'
 import InstagramIcon from 'components/icons/instagram.svg'
+import {Layout} from 'layout';
 
 export default function Contacts({data}: PageProps<{ artist: { contact: string[] } }>) {
     const {contact} = data.artist;
-    return <div className="flex flex-col">{contact.map(c => <Contact key={c} contact={c.trim()}/>)}</div>
+    return <Layout title="Contacts">
+        <div className="flex flex-col">{contact.map(c => <Contact key={c} contact={c.trim()}/>)}</div>
+    </Layout>
 }
 
 export const pageQuery = graphql`
@@ -14,6 +17,14 @@ export const pageQuery = graphql`
         }
     }
 `
+
+function Contact({contact}: { contact: string }) {
+    return <a className="flex gap-1 items-center" href={contactToHref(contact)} target="_blank">
+        <ContactIcon className="w-4 h-4" contact={contact}/>
+        <span>{contactToTitle(contact)}</span>
+    </a>
+
+}
 
 const INSTAGRAM_PREFIX = 'instagram:';
 
@@ -34,12 +45,4 @@ function contactToHref(contact: string) {
     return contact.startsWith(INSTAGRAM_PREFIX)
         ? `https://instagram.com/${contactToTitle(contact)}`
         : `mailto: ${contact}`
-}
-
-function Contact({contact}: { contact: string }) {
-    return <a className="flex gap-1" href={contactToHref(contact)} target="_blank">
-        <ContactIcon className="w-4" contact={contact}/>
-        <span>{contactToTitle(contact)}</span>
-    </a>
-
 }

@@ -2,6 +2,7 @@ import {graphql, PageProps} from 'gatsby';
 import {Title} from 'components/title';
 import {DateTimeRange} from 'components/dateTimeRange';
 import {JumpLink} from 'components/jumpLink';
+import {Layout} from '../layout';
 
 type EventModel = {
     id: string;
@@ -14,12 +15,11 @@ type EventModel = {
 
 
 export default function EventsPage({data}: PageProps<{ event: { nodes: EventModel[] } }>) {
-    return <>
-        <Title title="Events"/>
+    return <Layout title="Events">
         <div className="flex flex-col gap-4">
             {data.event.nodes.map(e => <Event key={e.id} event={e}/>)}
         </div>
-    </>
+    </Layout>
 }
 export const pageQuery = graphql`
     query EventsPageQuery {

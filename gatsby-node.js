@@ -1,7 +1,5 @@
 const path = require('node:path');
 
-
-
 module.exports.createPages = async function createPages({actions, graphql, basePath}) {
     const {default: slugify} = await import('@sindresorhus/slugify');
     const {createPage} = actions;
@@ -9,7 +7,7 @@ module.exports.createPages = async function createPages({actions, graphql, baseP
     const mediaTemplate = path.resolve(`src/templates/mediaPage.tsx`);
     const {data, errors} = await graphql(`
     query workPageQuery {
-        allContentfulWork {
+        content:allContentfulWork {
             works:nodes {
                 id
                 title             
@@ -25,7 +23,7 @@ module.exports.createPages = async function createPages({actions, graphql, baseP
         throw errors;
     }
 
-    for (const work of data.allContentfulWork.works) {
+    for (const work of data.content.works) {
         const workPath = `${basePath}/works/${slugify(work.title)}`;
         createPage({
             path: workPath,
@@ -35,18 +33,16 @@ module.exports.createPages = async function createPages({actions, graphql, baseP
                 title: work.title
             }
         });
-        const isNotOnlyOne = work.media.length > 1;
-        for (let i = 0; i < work.media.length; i++) {
-            const currentMedia = work.media[i];
+        const mediaPathGlob = `${workPath}/*`
+        for (const currentMedia of work.media) {
             createPage({
                 path: `${workPath}/${slugify(currentMedia.title)}`,
                 component: mediaTemplate,
                 context: {
                     id: currentMedia.id,
                     title: currentMedia.title,
-                    workId: work.id,
-                    nextTitle: isNotOnlyOne ? work.media[newIndex(i + 1, work.media.length)].title: undefined,
-                    prevTitle: isNotOnlyOne ? work.media[newIndex(i - 1, work.media.length)].title: undefined
+                    mediaPathGlob,
+                    modal: true,
                 }
             });
         }
