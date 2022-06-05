@@ -15,11 +15,9 @@ type EventModel = {
 
 
 export default function EventsPage({data}: PageProps<{ event: { nodes: EventModel[] } }>) {
-    return <Layout title="Events">
-        <div className="flex flex-col gap-4">
-            {data.event.nodes.map(e => <Event key={e.id} event={e}/>)}
-        </div>
-    </Layout>
+    return <div className="flex flex-col gap-4">
+        {data.event.nodes.map(e => <Event key={e.id} event={e}/>)}
+    </div>
 }
 export const pageQuery = graphql`
     query EventsPageQuery {

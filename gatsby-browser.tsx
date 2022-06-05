@@ -1,6 +1,6 @@
 import 'index.css';
 import {PageRenderer, WrapPageElementBrowserArgs} from 'gatsby';
-import {Modal} from './src/components/modal';
+import {Modal, Layout} from './src/layout';
 
 export async function onClientEntry() {
     if (location.pathname !== '/') {
@@ -10,15 +10,24 @@ export async function onClientEntry() {
 
 export function wrapPageElement({element, props}: WrapPageElementBrowserArgs) {
     if (!props.pageContext.modal) {
-        return element;
+        return <Layout title={props.pageContext.title}>
+            {element}
+        </Layout>;
     }
-
-    return <Modal
-        background={<PageRenderer location={{pathname: `../`} as any}/>}
-        content={element}
-        onClose={() => props.navigate('../')}/>
+    return <>
+        <PageRenderer location={{
+            ...props.location,
+            pathname: '../',
+        }}/>
+        <Modal onClose={() => props.navigate('../')}>
+            {element}
+        </Modal>
+    </>
 }
 
 declare global {
-    const ___loader: { loadPage(path: string): Promise<void> }
+    const ___loader: {
+        loadPage(rawPath: string): Promise<void>;
+        isPageNotFound(rawPath: string): boolean;
+    }
 }

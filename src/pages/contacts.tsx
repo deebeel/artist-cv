@@ -1,13 +1,10 @@
 import {graphql, PageProps} from 'gatsby';
 import MailIcon from 'components/icons/mail.svg'
 import InstagramIcon from 'components/icons/instagram.svg'
-import {Layout} from 'layout';
 
 export default function Contacts({data}: PageProps<{ artist: { contact: string[] } }>) {
     const {contact} = data.artist;
-    return <Layout title="Contacts">
-        <div className="flex flex-col">{contact.map(c => <Contact key={c} contact={c.trim()}/>)}</div>
-    </Layout>
+    return <div className="flex flex-col">{contact.map(c => <Contact key={c} contact={c.trim()}/>)}</div>
 }
 
 export const pageQuery = graphql`

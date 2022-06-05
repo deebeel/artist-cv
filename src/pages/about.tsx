@@ -1,11 +1,9 @@
 import {graphql, PageProps} from 'gatsby';
-import {Title} from 'components/title';
 import {GatsbyImage} from 'gatsby-plugin-image';
-import {Layout} from '../layout';
 
 export default function About({data}: PageProps<{ artist: ArtistModel }>) {
     const {artist} = data;
-    return <Layout title="About">
+    return <>
         <div>
             <GatsbyImage image={artist.photo.thumb} alt={`${artist.name} ${artist.surname}`}/>
         </div>
@@ -13,7 +11,7 @@ export default function About({data}: PageProps<{ artist: ArtistModel }>) {
             {artist.cv.map(cv => (
                 <a title={cv.title} key={cv.id} href={cv.url} download target="_blank">{cv.title}</a>))}
         </div>
-    </Layout>
+    </>
 }
 
 export const pageQuery = graphql`
