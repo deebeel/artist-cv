@@ -16,24 +16,16 @@ export default {
               'spaceId': process.env.CONTENTFUL_SPACE_ID
             }
         },
-        'gatsby-plugin-vanilla-extract',
         'gatsby-plugin-postcss',
         'gatsby-plugin-image',
         {
             resolve: 'gatsby-plugin-manifest',
             options: {
-                'icon': 'src/images/icon.png'
+                'icon': 'src/favicon.png'
             }
         },
         'gatsby-plugin-sharp',
         'gatsby-transformer-sharp',
-        {
-            resolve: 'gatsby-source-filesystem',
-            options: {
-                'name': 'images',
-                'path': './src/images/'
-            }
-        },
         {
             resolve: 'gatsby-plugin-svgr-svgo',
             options: {
