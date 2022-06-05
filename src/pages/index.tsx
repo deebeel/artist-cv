@@ -22,7 +22,7 @@ export default function EventsPage({data}: PageProps<{ event: { nodes: EventMode
 }
 export const pageQuery = graphql`
     query EventsPageQuery {
-        event: allContentfulEvents(sort: {fields: from, order: DESC}) {
+        event: allContentfulEvent(sort: {fields: from, order: DESC}) {
             nodes {
                 id,
                 title,
