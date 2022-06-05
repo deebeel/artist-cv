@@ -9,8 +9,8 @@ export default function MediaPage({
     if (currentPathDefinition == null) {
         return null;
     }
-    const next = currentPathDefinition.next || sibling.paths[0]?.next;
-    const previous = currentPathDefinition.previous || sibling.paths[sibling.paths.length - 1]?.previous;
+    const next = currentPathDefinition.next || sibling.paths[0]?.node;
+    const previous = currentPathDefinition.previous || sibling.paths[sibling.paths.length - 1]?.node;
     return <Carousel image={media}
                      onPrev={!!previous ? () => navigate(previous.path) : undefined}
                      onNext={!!next ? () => navigate(next.path) : undefined}/>
