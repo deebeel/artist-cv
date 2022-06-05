@@ -2,8 +2,6 @@ import {DateTime} from 'components/dateTime';
 import {isEmpty} from 'utils/isEmpty';
 import {Description, DescriptionDefinition} from './description';
 import {GatsbyImage} from 'gatsby-plugin-image';
-import {Link} from 'gatsby';
-import slugify from '@sindresorhus/slugify';
 
 export type WorkDefinition = {
     id: string;
@@ -14,7 +12,7 @@ export type WorkDefinition = {
     material?: string[];
     overview?: string;
     descriptionV2: DescriptionDefinition;
-    media: Demo.FullScreenImage[]
+    media: Demo.Image[]
 }
 
 export function Work({work}: { work: WorkDefinition }) {
@@ -57,7 +55,7 @@ function Material({material}: { material?: string[] }) {
     return <div>{material.join(', ')}</div>;
 }
 
-function Media({media}: { media?: Demo.FullScreenImage[] }) {
+function Media({media}: { media?: Demo.Image[] }) {
     if (media == null) {
         return null;
     }
@@ -66,11 +64,12 @@ function Media({media}: { media?: Demo.FullScreenImage[] }) {
         lg:grid-cols-2
         xl:grid-cols-3
     ">
-        {media.map(m => <Link
-            to={slugify(m.title)}
-            state={{modal: true}}
-            className="flex flex-col justify-center"
-            key={m.id}><GatsbyImage alt={m.title} image={m.thumb} objectFit="contain"/></Link>)}
+        {media.map(m =>
+            <div
+                className="flex flex-col justify-center"
+                key={m.id}>
+                <GatsbyImage alt={m.title} image={m.thumb} objectFit="contain"/>
+            </div>)}
     </div>
 
 }

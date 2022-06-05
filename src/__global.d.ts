@@ -12,9 +12,6 @@ declare global {
             thumb: IGatsbyImageData
             description?: string;
         }
-        export type FullScreenImage = Image & {
-            full: IGatsbyImageData
-        }
     }
     type GenericProps<T = unknown> = T & {
         children?: React.ReactNode

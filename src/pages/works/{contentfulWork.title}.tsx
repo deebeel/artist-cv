@@ -1,9 +1,14 @@
 import {graphql, PageProps} from 'gatsby';
-import {Work, WorkDefinition} from './work';
+import {Work, WorkDefinition} from 'components/work';
+import {Layout} from 'components/layout';
+import {Title} from 'components/title';
 
 export default function WorkPage({data}: PageProps<{ work: WorkDefinition }>) {
     const work = data.work;
-    return <Work work={work}/>
+    return <Layout>
+        <Title title={work.title}/>
+        <Work work={work}/>
+    </Layout>
 }
 export const pageQuery = graphql`
     query workPageQuery($id: String!) {
