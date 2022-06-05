@@ -45,7 +45,7 @@ function Category({category}: { category?: string[] }) {
     if (isEmpty(category)) {
         return null;
     }
-    return <div>{category}</div>;
+    return <div>{category.join(', ')}</div>;
 }
 
 function Material({material}: { material?: string[] }) {

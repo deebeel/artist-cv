@@ -19,7 +19,7 @@ export const pageQuery = graphql`
             category
             material
             overview
-            descriptionV2 {  
+            description {  
                 raw
                 references {
                     contentful_id
