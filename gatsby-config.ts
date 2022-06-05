@@ -2,10 +2,9 @@ import type {GatsbyConfig} from 'gatsby';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
-
 export default {
     siteMetadata: {
-        title: `CV: Elisa Mamardashvili`
+        title: process.env.SITE_TITLE
     },
     plugins: [
         'gatsby-plugin-root-import',
