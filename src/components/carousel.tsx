@@ -1,6 +1,6 @@
 import {GatsbyImage} from 'gatsby-plugin-image';
-import NextIcon from 'components/icons/next.svg';
-import PrevIcon from 'components/icons/prev.svg';
+import NextIcon from './icons/next.svg';
+import PrevIcon from './icons/prev.svg';
 import mousetrap from 'mousetrap';
 import {useEffect} from 'react';
 

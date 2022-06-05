@@ -1,8 +1,6 @@
 import {graphql, PageProps} from 'gatsby';
-import {Title} from 'components/title';
 import {DateTimeRange} from 'components/dateTimeRange';
 import {JumpLink} from 'components/jumpLink';
-import {Layout} from '../layout';
 
 type EventModel = {
     id: string;
