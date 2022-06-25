@@ -15,19 +15,8 @@ export const pageQuery = graphql`
         work: contentfulWork(id: { eq: $id }) {
             title
             date
-            place
-            category
-            material
-            overview
             description {  
                 raw
-                references {
-                    contentful_id
-                    title
-                    description
-                    thumb: gatsbyImage(width: 300)
-                    __typename
-                } 
             }
             media {
                 title

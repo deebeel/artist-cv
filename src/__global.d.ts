@@ -6,7 +6,6 @@ declare global {
             id: string;
             title: string;
             url: string;
-            mimeType: string;
         }
         export type Image = File & {
             thumb: IGatsbyImageData

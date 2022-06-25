@@ -28,7 +28,7 @@ function Contact({contact}: { contact: string }) {
 
 }
 
-const INSTAGRAM_PREFIX = 'instagram:';
+const INSTAGRAM_PREFIX = 'https://www.instagram.com/';
 
 function ContactIcon({contact, className}: GenericProps<{ contact: string }>) {
     return contact.startsWith(INSTAGRAM_PREFIX)
@@ -38,13 +38,13 @@ function ContactIcon({contact, className}: GenericProps<{ contact: string }>) {
 
 function contactToTitle(contact: string) {
     return contact.startsWith(INSTAGRAM_PREFIX)
-        ? contact.substring(INSTAGRAM_PREFIX.length)
+        ? contact.substring(contact.lastIndexOf('/') + 1)
         : contact
 
 }
 
 function contactToHref(contact: string) {
     return contact.startsWith(INSTAGRAM_PREFIX)
-        ? `https://instagram.com/${contactToTitle(contact)}`
+        ? contact
         : `mailto: ${contact}`
 }

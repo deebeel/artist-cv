@@ -2,14 +2,17 @@ import {graphql, PageProps} from 'gatsby';
 import {DateTimeRange} from 'components/dateTimeRange';
 import {JumpLink} from 'components/jumpLink';
 import {Layout} from 'components/layout';
+import {DateTime} from 'components/dateTime';
+import {Description, DescriptionDefinition} from 'components/description';
 
 type EventModel = {
     id: string;
     title: string;
     place: string;
+    at: string;
     from: string;
     to: string;
-    description: { text: string };
+    descriptionV2: DescriptionDefinition;
 }
 
 
@@ -29,7 +32,17 @@ export const pageQuery = graphql`
                 place,
                 from,
                 to,
-                description { text: description }
+                at: from,
+                descriptionV2 { 
+                    raw
+                    references {
+                        contentful_id
+                        title
+                        description
+                        thumb: gatsbyImage(width: 400)
+                        __typename
+                    } 
+                }
             }
         }
     }`;
@@ -41,7 +54,8 @@ function Event({event}: { event: EventModel }) {
             <h2 className="font-semibold mb-2">{event.title}</h2>
         </JumpLink>
         <div className="text-sm">{event.place}</div>
-        <DateTimeRange className="text-sm" from={event.from} to={event.to}/>
-        <div className="mb-2 text-base">{event.description.text}</div>
+        {!event.to && <DateTime className="text-sm" at={event.at}/>}
+        {event.to && <DateTimeRange className="text-sm" from={event.from} to={event.to}/>}
+        <Description description={event.descriptionV2}/>
     </section>
 }
