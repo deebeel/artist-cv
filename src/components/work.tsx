@@ -1,18 +1,14 @@
-import {DateTime} from 'components/dateTime';
 import {Description, DescriptionDefinition} from 'components/description';
 import {GatsbyImage} from 'gatsby-plugin-image';
 
 export type WorkDefinition = {
     id: string;
-    title: string;
-    date: string;
     description: DescriptionDefinition;
     media: Demo.Image[]
 }
 
 export function Work({work}: { work: WorkDefinition }) {
     return <article className="flex flex-col gap-2 text-sm">
-        {work.date && <DateTime at={work.date} preset="y"/>}
         <Description description={work.description}/>
         <Media media={work.media}/>
     </article>
