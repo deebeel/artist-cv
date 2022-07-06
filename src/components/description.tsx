@@ -89,7 +89,7 @@ const options: Options = {
             if (node.content[0]?.value === '') {
                 return <br/>
             } else {
-                return <p className="text-sm leading-loose">{children}</p>
+                return <p className="text-sm leading-relaxed">{children}</p>
             }
         },
         [BLOCKS.QUOTE]: (children: any) => (
@@ -100,9 +100,8 @@ const options: Options = {
         [BLOCKS.HR]: () => <hr className="mb-6"/>,
         [BLOCKS.EMBEDDED_ASSET]: (node: Node) => {
             const {thumb, title} = node.data.target as Demo.Image
-            return <div className="flex flex-col justify-center items-center mb-10 gap-1">
-                <div><GatsbyImage image={thumb} objectFit="contain" alt={title}/></div>
-                <div className="text-xs">{title}</div>
+            return <div className="flex justify-center items-center mb-10 mt-10">
+                <GatsbyImage image={thumb} objectFit="contain" alt={title}/>
             </div>
         },
     },

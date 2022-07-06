@@ -5,14 +5,22 @@ import {Layout} from 'components/layout';
 export default function About({data}: PageProps<{ artist: ArtistModel }>) {
     const {artist} = data;
     return <Layout>
-        <div>
-            <GatsbyImage image={artist.photo.thumb} alt={`${artist.name} ${artist.surname}`}/>
-        </div>
-        <div className="flex flex-col">
-            {artist.cv.map(cv => (
-                <a title={cv.title} key={cv.id} href={cv.url} download target="_blank">{cv.title}</a>))}
+        <div className="flex flex-col gap-4">
+            <div className="flex gap-2">
+                {artist.cv.map(cv => <CVLink key={cv.id} cv={cv}/>)}
+            </div>
+            <div>
+                <GatsbyImage image={artist.photo.thumb} alt={`${artist.name} ${artist.surname}`}/>
+            </div>
         </div>
     </Layout>
+}
+
+function CVLink({cv}: { cv: Demo.File }) {
+    return <a className="text-sm font-semibold hover:opacity-30"
+              title={cv.title}
+              href={cv.url}
+              download target="_blank">{cv.title}</a>
 }
 
 export const pageQuery = graphql`
@@ -27,7 +35,7 @@ export const pageQuery = graphql`
                     title
                     url
                     mimeType,
-                    thumb: gatsbyImage(height: 200)
+                    thumb: gatsbyImage(height: 300)
                 }
                 cv {
                     id
@@ -41,8 +49,6 @@ interface ArtistModel {
     id: string;
     name: string;
     surname: string;
-    email: string;
-    birthDay: string;
     photo: Demo.Image;
     cv: Demo.File[];
 }
