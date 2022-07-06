@@ -33,12 +33,7 @@ const options: Options = {
     },
     renderNode: {
         [INLINES.HYPERLINK]: (node: Block | Inline, children: React.ReactNode) => (
-            <a
-                href={node.data.uri}
-                target="_blank"
-                rel="noreferrer"
-                className="text-brand-default underline"
-            >
+            <a href={node.data.uri} target="_blank" rel="noreferrer" className="text-brand-default underline">
                 {children}
             </a>
         ),
