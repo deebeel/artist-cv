@@ -3,6 +3,8 @@ import {Layout} from 'components/layout';
 import {Description, DescriptionDefinition} from 'components/description';
 
 import {GatsbyImage} from 'gatsby-plugin-image';
+import {isEmpty} from '../../utils/isEmpty';
+import {Video} from '../../components/video';
 
 export default function WorkPage({data}: PageProps<{ work: WorkDefinition }>) {
     const work = data.work;
@@ -14,26 +16,37 @@ export default function WorkPage({data}: PageProps<{ work: WorkDefinition }>) {
 export type WorkDefinition = {
     id: string;
     description: DescriptionDefinition;
-    media: Demo.Image[]
+    photos: Demo.Image[];
+    videoLinks: string[]
+}
+
+function Videos({videoLinks}: { videoLinks: string[] }) {
+    if (isEmpty(videoLinks)) {
+        return null;
+    }
+    return <div className="flex flex-col justify-center items-center">
+        {videoLinks.map(l => <Video className="w-full md:w-3/4 max-w-2xl" key={l} link={l}/>)}
+    </div>
 }
 
 export function Work({work}: { work: WorkDefinition }) {
     return <article className="flex flex-col gap-10 text-sm">
         <Description description={work.description}/>
-        <Media media={work.media}/>
+        <Videos videoLinks={work.videoLinks}/>
+        <Photos photos={work.photos}/>
     </article>
 }
 
-function Media({media}: { media?: Demo.Image[] }) {
-    if (media == null) {
+function Photos({photos}: { photos?: Demo.Image[] }) {
+    if (photos == null) {
         return null;
     }
-    return <div className="flex flex-col justify-center gap-10">
-        {media.map(m =>
+    return <div className="flex flex-col justify-center items-center gap-10">
+        {photos.map(m =>
             <div
-                className="flex flex-col justify-center"
+                className="w-full w-3/4 max-w-2xl flex justify-center items-center"
                 key={m.id}>
-                <GatsbyImage alt={m.title} image={m.thumb}/>
+                <GatsbyImage alt={m.title} image={m.thumb} objectFit="contain"/>
             </div>)}
     </div>
 
@@ -45,13 +58,14 @@ export const pageQuery = graphql`
             description {  
                 raw
             }
-            media {
+            photos: media {
                 title
                 url
                 id
                 mimeType
-                thumb: gatsbyImage(width: 600, fit: CONTAIN)                                        
+                thumb: gatsbyImage(width: 700, fit: CONTAIN)                                        
             } 
+            videoLinks: videoLink
         }
     }
 `;
