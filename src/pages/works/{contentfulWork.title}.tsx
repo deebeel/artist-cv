@@ -3,8 +3,8 @@ import {Layout} from 'components/layout';
 import {Description, DescriptionDefinition} from 'components/description';
 
 import {GatsbyImage} from 'gatsby-plugin-image';
-import {isEmpty} from '../../utils/isEmpty';
-import {Video} from '../../components/video';
+import {isEmpty} from 'utils/isEmpty';
+import {Video} from 'components/video';
 
 export default function WorkPage({data}: PageProps<{ work: WorkDefinition }>) {
     const work = data.work;

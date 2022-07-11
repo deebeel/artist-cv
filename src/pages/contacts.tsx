@@ -6,8 +6,8 @@ import {Layout} from 'components/layout';
 export default function Contacts({data}: PageProps<{ artist: { contact: string[] } }>) {
     const {contact} = data.artist;
     return <Layout>
-        <div className="md:mt-36">
-            <div className="flex flex-col gap-4">
+        <div className="h-screen flex flex-col-reverse ">
+            <div className="flex flex-col gap-4 mb-44">
                 {contact.map(c => <Contact key={c} contact={c.trim()}/>)}
             </div>
         </div>
@@ -24,7 +24,7 @@ export const pageQuery = graphql`
 `
 
 function Contact({contact}: { contact: string }) {
-    return <a className="flex gap-1 items-center font-semibold" href={contactToHref(contact)} target="_blank">
+    return <a className="flex gap-1 items-center" href={contactToHref(contact)} target="_blank">
         <ContactIcon className="w-4 h-4" contact={contact}/>
         <span>{contactToTitle(contact)}</span>
     </a>

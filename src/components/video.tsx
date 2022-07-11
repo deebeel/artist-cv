@@ -17,7 +17,7 @@ function YoutubeVideo({link, title}: { link: string, title?: string }) {
         className="w-full aspect-video"
         src={`https://www.youtube.com/embed/${id}?rel=0`}
         title={title}
-        allow="accelerometer; encrypted-media; clipboard-write; gyroscope; picture-in-picture"
+        allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
     />
 }

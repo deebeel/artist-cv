@@ -4,11 +4,12 @@ import {graphql, useStaticQuery} from 'gatsby';
 import HamburgerIcon from 'components/icons/hamburger.svg'
 import {useState} from 'react';
 import classNames from 'classnames';
+import slugify from '@sindresorhus/slugify';
 
 
-type WorkNavigation = {
-    path: string;
-    pageContext: { title: string };
+type WorkDescriptor = {
+    id: string;
+    title: string;
 }
 
 export function Nav() {
@@ -19,7 +20,7 @@ export function Nav() {
     </nav>;
 }
 
-function MobileNav({works}: { works: WorkNavigation[] }) {
+function MobileNav({works}: { works: WorkDescriptor[] }) {
     const [isOpen, setOpen] = useState(false);
 
     return <section className="md:hidden" onClick={() => isOpen && setOpen(false)}>
@@ -33,16 +34,16 @@ function MobileNav({works}: { works: WorkNavigation[] }) {
     </section>
 }
 
-function DesktopNav({works}: { works: WorkNavigation[] }) {
+function DesktopNav({works}: { works: WorkDescriptor[] }) {
     return <div className="flex-col gap-3 hidden md:flex">
         <NavInternal workNavigations={works}/>
     </div>
 }
 
-function NavInternal({workNavigations}: { workNavigations: WorkNavigation[] }) {
+function NavInternal({workNavigations}: { workNavigations: WorkDescriptor[] }) {
     return <>
         <NavGroup>
-            {workNavigations.map(n => <NavItem key={n.path} location={n.path}>{n.pageContext.title}</NavItem>)}
+            {workNavigations.map(n => <NavItem key={n.id} location={`/works/${slugify(n.title)}`}>{n.title}</NavItem>)}
         </NavGroup>
         <NavGroup>
             <NavItem location="/about">About</NavItem>
@@ -55,12 +56,12 @@ function NavInternal({workNavigations}: { workNavigations: WorkNavigation[] }) {
 function useWorkNavigationInfo() {
     const data = useStaticQuery(graphql`
     query allWorkNavigationInfo {
-        worksNavigation:allSitePage(filter: {path: {glob: "/works/*"}}) {
+        worksNavigation:allContentfulWork(sort: {fields: date, order: DESC}) {
             nodes {
-                path
-                pageContext
+                id
+                title
             }
         }
     }`);
-    return data.worksNavigation.nodes as WorkNavigation[]
+    return data.worksNavigation.nodes as WorkDescriptor[]
 }
