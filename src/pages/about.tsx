@@ -35,7 +35,7 @@ export const pageQuery = graphql`
                     title
                     url
                     mimeType,
-                    thumb: gatsbyImage(height: 300)
+                    thumb: gatsbyImage(height: 250)
                 }
                 cv {
                     id
